@@ -19,6 +19,9 @@
             --success-green: #378b5e; 
         }
 
+        /* 終極防跑版設定 */
+        * { box-sizing: border-box; }
+
         body { 
             font-family: 'Helvetica Neue', 'PingFang TC', 'Microsoft JhengHei', sans-serif; 
             background: var(--bg-color); 
@@ -43,7 +46,7 @@
         input[type="text"]:focus { border-bottom-color: var(--primary-dark); }
 
         /* 截圖模式專用抬頭 */
-        .print-header { display: none; text-align: center; margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color); position: relative; }
+        .print-header { display: none; text-align: center; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color); position: relative; }
         .print-header::after { content: ''; position: absolute; bottom: -1px; left: 40%; width: 20%; height: 1px; background: var(--accent-gold); }
 
         /* 目標選擇區 */
@@ -55,13 +58,15 @@
 
         .container { max-width: 700px; margin: 0 auto; padding: 10px 15px; }
         
-        /* 產品列表樣式 */
-        table { width: 100%; border-collapse: separate; border-spacing: 0; table-layout: fixed; }
-        td { padding: 20px 5px; border-bottom: 1px solid var(--border-color); vertical-align: middle; }
+        /* ✨ 產品列表樣式 ✨ */
+        table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+        td { padding: 20px 0; border-bottom: 1px solid var(--border-color); vertical-align: middle; }
         
-        /* 欄位寬度最佳化分配 */
-        .product-info-cell { width: 75%; overflow: hidden; padding-right: 5px; } 
-        .stepper-cell { width: 25%; white-space: nowrap; text-align: right; }
+        /* 預設隱藏列印專屬欄位 */
+        .show-on-print { display: none !important; }
+        
+        .product-info-cell { width: 70%; padding-right: 10px; overflow: hidden; } 
+        .stepper-cell { width: 30%; white-space: nowrap; text-align: right; }
         
         /* 照片與文字排版 */
         .product-flex-wrap { display: flex; align-items: center; width: 100%; overflow: hidden; }
@@ -70,7 +75,7 @@
         
         .product-details { flex-grow: 1; min-width: 0; overflow: hidden; }
         
-        /* ✨ 強制單行顯示 ✨ */
+        /* 強制單行顯示 */
         .p-name { 
             font-weight: bold; font-size: 15px; color: var(--primary-dark); 
             display: block; margin-bottom: 6px; letter-spacing: 1px;
@@ -79,10 +84,8 @@
             text-overflow: ellipsis; 
         }
         
-        /* 精品標籤設計 */
         .step-badge { display: inline-block; border: 1px solid var(--accent-gold); color: var(--accent-gold); padding: 0px 6px; border-radius: 12px; font-size: 10px; font-weight: bold; letter-spacing: 0.5px; background: #fff; margin-right: 3px; vertical-align: middle; margin-bottom: 2px;}
 
-        /* 價格列 */
         .price-row { display: flex; align-items: center; gap: 8px; flex-wrap: nowrap; overflow: hidden; }
         .p-price { font-size: 14px; color: var(--text-main); font-weight: bold; font-family: 'Helvetica Neue', sans-serif; white-space: nowrap; }
         .p-rv { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 10px; color: var(--accent-gold-dark); background-color: #fff; border: 1px solid var(--accent-gold-light); font-weight: bold; letter-spacing: 1px; white-space: nowrap;}
@@ -121,14 +124,40 @@
         .team-credit { background: transparent; padding: 5px 10px 15px; text-align: center; font-size: 10px; color: var(--text-light); letter-spacing: 2px; font-weight: 300; }
         .print-credit { display: none; text-align: center; color: var(--text-light); font-size: 11px; letter-spacing: 2px; margin-top: 30px; padding-top: 15px; border-top: 1px solid var(--border-color); font-weight: 300; }
 
-        /* ✨ 截圖模式 (Print Mode) ✨ */
+        /* ✨ 截圖模式 (Print Mode) 專屬設定 ✨ */
         body.print-mode { background-color: #fff; padding-bottom: 40px; }
         body.print-mode .hide-on-print { display: none !important; }
         
-        /* 加入精品金框 */
+        /* 截圖模式：顯示列印專屬欄位 */
+        body.print-mode .show-on-print { display: table-cell !important; }
+        body.print-mode thead.show-on-print { display: table-header-group !important; }
+        body.print-mode div.show-on-print { display: block !important; }
+
+        /* 截圖表頭設計 */
+        .print-table-header th {
+            color: var(--accent-gold-dark);
+            font-size: 12px;
+            letter-spacing: 2px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--accent-gold);
+            font-weight: bold;
+        }
+        
+        /* ✨ 截圖欄位寬度與對齊優化 (數量靠右) ✨ */
+        body.print-mode .product-info-cell { width: 55%; }
+        /* 數量：靠右對齊並保留一點右邊距，與金額錯開 */
+        body.print-mode .print-qty-cell { width: 20%; text-align: right; padding-right: 15px; font-size: 16px; font-family: 'Helvetica Neue', sans-serif; font-weight: bold; color: var(--text-main); }
+        /* 金額：靠最右邊 */
+        body.print-mode .print-amt-cell { width: 25%; text-align: right; font-size: 15px; font-family: 'Helvetica Neue', sans-serif; font-weight: bold; color: var(--primary-dark); }
+        
+        /* 隱藏單價列，讓畫面更乾淨 */
+        body.print-mode .price-row { display: none !important; }
+        body.print-mode .p-name { margin-bottom: 0; }
+
+        /* 精品金框 */
         body.print-mode .container { 
             max-width: 100%; 
-            padding: 40px 25px 30px; /* 原本留白太多，適度縮小 */
+            padding: 30px 20px; 
             border: 1px solid var(--accent-gold-light); 
             outline: 1px solid var(--accent-gold-light); 
             outline-offset: -6px; 
@@ -140,49 +169,22 @@
         body.print-mode .print-summary { display: block; }
         body.print-mode .print-credit { display: block; }
         
-        /* 列表樣式調整 */
         body.print-mode td { padding: 12px 0; border-bottom: 1px dashed var(--border-color); }
         body.print-mode .product-image-wrapper { border-color: var(--border-color); color: var(--text-light); }
-        
-        /* ✨ 截圖模式數量排版與 x 符號距離優化 ✨ */
-        body.print-mode .stepper { border: none; background: transparent; justify-content: flex-end; }
-        body.print-mode .stepper .btn { display: none; }
-        body.print-mode .stepper .qty-val { 
-            font-size: 17px; 
-            color: var(--accent-gold-dark); 
-            font-family: Georgia, serif; 
-            text-align: right; 
-            width: auto;
-            vertical-align: middle;
-        }
-        /* 將 margin-right 縮小至 5px，讓 x 靠近數字 */
-        body.print-mode .stepper::before { 
-            content: 'x'; 
-            font-size: 13px; 
-            color: var(--text-light); 
-            margin-right: 5px; 
-            font-family: Arial; 
-            vertical-align: middle;
-            margin-top: 2px;
-        }
 
         /* 返回按鈕 */
         .return-bar { text-align: center; margin: 20px auto 40px; display: none; }
         .btn-back { background-color: #fff; color: var(--primary-dark); border: 1px solid var(--primary-dark); padding: 10px 30px; border-radius: 30px; font-size: 14px; cursor: pointer; letter-spacing: 2px; transition: 0.3s; }
         .btn-back:hover { background: var(--bg-color); }
 
-        /* ✨ 手機版極限自適應優化 (徹底解決斷行與破版) ✨ */
+        /* ✨ 手機版極限自適應優化 ✨ */
         @media (max-width: 480px) {
-            td { padding: 12px 0px; }
-            .product-info-cell { width: 78%; padding-right: 5px; } 
-            .stepper-cell { width: 22%; }
+            .product-info-cell { width: 70%; padding-right: 5px; } 
+            .stepper-cell { width: 30%; }
             
-            /* 圓框再微調小一點，讓出空間給文字 */
-            .product-image-wrapper { width: 34px; height: 34px; margin-right: 8px; font-size: 13px; }
-            
-            /* 字體進一步縮小確保單行 */
-            .p-name { font-size: 13px; margin-bottom: 4px; letter-spacing: 0px; }
-            .step-badge { font-size: 9px; padding: 0 4px; margin-right: 2px; }
+            /* 圓框再微調，讓出空間給文字 */
+            .product-image-wrapper { width: 32px; height: 32px; margin-right: 8px; font-size: 13px; }
+            .p-name { font-size: 13px; letter-spacing: 0px; }
             .price-row { gap: 5px; }
             .p-price { font-size: 12px; }
             .p-rv { font-size: 9px; padding: 2px 4px; }
@@ -190,14 +192,16 @@
             .stepper .btn { width: 28px; height: 28px; font-size: 16px; }
             .stepper .qty-val { width: 25px; font-size: 13px; }
             
-            /* ✨ 最重要的：截圖模式在手機上不再留白過度 ✨ */
-            body.print-mode .container { 
-                padding: 25px 12px 20px; 
-                margin: 8px; 
-                outline-offset: -4px; 
-            }
+            /* 截圖模式在手機上的完美縮放 */
+            body.print-mode .container { padding: 25px 12px 20px; margin: 8px; outline-offset: -4px; }
             body.print-mode h2 { font-size: 22px; letter-spacing: 8px; }
-            body.print-mode .stepper .qty-val { font-size: 16px; }
+            body.print-mode .p-name { font-size: 11.5px; } 
+            
+            /* 數量列在手機上右邊距稍微調小，保持平衡 */
+            body.print-mode .print-qty-cell { font-size: 14px; padding-right: 10px; }
+            body.print-mode .print-amt-cell { font-size: 13px; }
+            
+            .print-table-header th { font-size: 10px; padding-bottom: 8px; }
         }
 
     </style>
@@ -259,7 +263,7 @@
 </div>
 
 <div class="return-bar" id="returnBar">
-    <button class="btn-back" onclick="returnToEdit()"> BACK 重新編輯</button>
+    <button class="btn-back" onclick="returnToEdit()">⬅ BACK 重新編輯</button>
 </div>
 
 <div class="footer hide-on-print">
@@ -314,6 +318,19 @@
     // 初始化渲染列表
     const container = document.getElementById('main-list');
     let html = '<table>';
+    
+    // ✨ 專屬列印模式的表格抬頭 (數量標題也設定靠右對齊並加上右邊距) ✨
+    html += `
+    <thead class="show-on-print print-table-header">
+        <tr>
+            <th style="text-align: left; width: 55%;">品項 ITEM</th>
+            <th style="text-align: right; width: 20%; padding-right: 15px;">數量</th>
+            <th style="text-align: right; width: 25%;">金額</th>
+        </tr>
+    </thead>
+    <tbody>
+    `;
+
     products.forEach((p, i) => {
         let iconChar = p.i;
         
@@ -324,23 +341,32 @@
                     <div class="product-image-wrapper">${iconChar}</div>
                     <div class="product-details">
                         <span class="p-name">${p.n}</span>
-                        <div class="price-row">
+                        <div class="price-row hide-on-print">
                             <span class="p-price">$ ${p.p.toLocaleString()}</span>
                             <span class="p-rv">${p.r.toLocaleString()} RV</span>
                         </div>
                     </div>
                 </div>
             </td>
-            <td class="stepper-cell">
+            
+            <td class="stepper-cell hide-on-print" align="right">
                 <div class="stepper">
                     <div class="btn" onclick="change(${i}, -1)">−</div>
                     <input type="number" class="qty-val" id="q-${i}" value="0" readonly>
                     <div class="btn" onclick="change(${i}, 1)">+</div>
                 </div>
             </td>
+            
+            <td class="print-qty-cell show-on-print">
+                <span id="pq-${i}">0</span>
+            </td>
+            <td class="print-amt-cell show-on-print">
+                $ <span id="pa-${i}">0</span>
+            </td>
         </tr>`;
     });
-    container.innerHTML = html + '</table>';
+    html += '</tbody></table>';
+    container.innerHTML = html;
 
     function change(index, delta) {
         const input = document.getElementById(`q-${index}`);
@@ -354,7 +380,14 @@
         let tq = 0, tp = 0, tr = 0;
         products.forEach((p, i) => {
             const q = parseInt(document.getElementById(`q-${i}`).value);
-            tq += q; tp += q * p.p; tr += q * p.r;
+            tq += q; 
+            const itemTotal = q * p.p;
+            tp += itemTotal; 
+            tr += q * p.r;
+            
+            // 同步更新列印模式的單項數量與金額
+            document.getElementById(`pq-${i}`).innerText = q;
+            document.getElementById(`pa-${i}`).innerText = itemTotal.toLocaleString();
         });
         
         const rvDisplay = document.getElementById('tr');
@@ -392,7 +425,7 @@
             if (q === 0) {
                 row.style.display = 'none';
             } else {
-                row.style.display = '';
+                row.style.display = ''; // 恢復預設 table-row
                 hasItems = true;
             }
         });
