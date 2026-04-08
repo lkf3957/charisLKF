@@ -19,7 +19,6 @@
             --success-green: #378b5e; 
         }
 
-        /* 終極防跑版設定 */
         * { box-sizing: border-box; }
 
         body { 
@@ -37,7 +36,6 @@
         .team-name-top { color: var(--accent-gold); font-size: 13px; letter-spacing: 6px; margin-bottom: 10px; font-weight: bold; }
         h1 { font-family: 'Times New Roman', Times, serif; font-size: 38px; font-weight: 300; letter-spacing: 12px; color: var(--primary-dark); margin: 0; }
 
-        /* 表單：客戶姓名輸入框 */
         .form-wrapper { max-width: 700px; margin: 0 auto; padding: 25px 25px 0; background: var(--bg-color); }
         .form-group { background: transparent; margin-bottom: 10px; }
         .input-row { margin-bottom: 15px; }
@@ -45,11 +43,9 @@
         input[type="text"] { width: 100%; padding: 10px 0; border: none; border-bottom: 1px solid var(--accent-gold); background-color: transparent; font-size: 16px; color: var(--primary-dark); outline: none; transition: border-color 0.3s; }
         input[type="text"]:focus { border-bottom-color: var(--primary-dark); }
 
-        /* 截圖模式專用抬頭 */
         .print-header { display: none; text-align: center; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color); position: relative; }
         .print-header::after { content: ''; position: absolute; bottom: -1px; left: 40%; width: 20%; height: 1px; background: var(--accent-gold); }
 
-        /* 目標選擇區 */
         .target-selector { padding: 25px 15px; text-align: center; background: #fff; border-bottom: 1px solid var(--border-color); box-shadow: 0 4px 15px rgba(0,0,0,0.01); }
         .target-title { font-size: 13px; color: var(--text-light); margin-bottom: 15px; letter-spacing: 4px; text-transform: uppercase; }
         .target-btns { display: flex; justify-content: center; gap: 12px; }
@@ -58,26 +54,24 @@
 
         .container { max-width: 700px; margin: 0 auto; padding: 10px 15px; }
         
-        /* ✨ 產品列表樣式 ✨ */
+        /* 產品列表樣式 */
         table { width: 100%; border-collapse: collapse; table-layout: fixed; }
         td { padding: 20px 0; border-bottom: 1px solid var(--border-color); vertical-align: middle; }
         
-        /* 預設隱藏列印專屬欄位 */
         .show-on-print { display: none !important; }
         
         .product-info-cell { width: 70%; padding-right: 10px; overflow: hidden; } 
         .stepper-cell { width: 30%; white-space: nowrap; text-align: right; }
         
-        /* 照片與文字排版 */
         .product-flex-wrap { display: flex; align-items: center; width: 100%; overflow: hidden; }
         .product-image-wrapper { width: 44px; height: 44px; flex-shrink: 0; margin-right: 12px; border-radius: 50%; background-color: var(--card-bg); border: 1px solid var(--accent-gold); display: flex; align-items: center; justify-content: center; font-size: 15px; color: var(--accent-gold); font-weight: bold; overflow: hidden; }
         .product-image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
         
         .product-details { flex-grow: 1; min-width: 0; overflow: hidden; }
         
-        /* 強制單行顯示 */
+        /* 品名文字放大 */
         .p-name { 
-            font-weight: bold; font-size: 15px; color: var(--primary-dark); 
+            font-weight: bold; font-size: 16px; color: var(--primary-dark); 
             display: block; margin-bottom: 6px; letter-spacing: 1px;
             white-space: nowrap; 
             overflow: hidden; 
@@ -86,105 +80,84 @@
         
         .step-badge { display: inline-block; border: 1px solid var(--accent-gold); color: var(--accent-gold); padding: 0px 6px; border-radius: 12px; font-size: 10px; font-weight: bold; letter-spacing: 0.5px; background: #fff; margin-right: 3px; vertical-align: middle; margin-bottom: 2px;}
 
+        /* ✨ 專屬多行顯示語法 ✨ */
+        .break-on-print { display: inline; }
+
         .price-row { display: flex; align-items: center; gap: 8px; flex-wrap: nowrap; overflow: hidden; }
         .p-price { font-size: 14px; color: var(--text-main); font-weight: bold; font-family: 'Helvetica Neue', sans-serif; white-space: nowrap; }
         .p-rv { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 10px; color: var(--accent-gold-dark); background-color: #fff; border: 1px solid var(--accent-gold-light); font-weight: bold; letter-spacing: 1px; white-space: nowrap;}
 
-        /* 微調鈕 Stepper */
         .stepper { display: inline-flex; align-items: center; justify-content: flex-end; background: transparent; border: 1px solid var(--border-color); border-radius: 20px; overflow: hidden; }
         .btn { width: 32px; height: 32px; background: var(--bg-color); border: none; font-size: 18px; color: var(--primary-dark); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.2s; }
         .btn:hover { background: var(--accent-gold-light); }
         .btn:active { background: var(--accent-gold); color: #fff; }
         .qty-val { width: 30px; text-align: center; font-size: 14px; font-weight: bold; color: var(--primary-dark); border: none; background: transparent; pointer-events: none; padding: 0; margin: 0; }
 
-        /* 底部統計區 (編輯模式) */
         .footer { position: fixed; bottom: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); color: var(--primary-dark); border-top: 1px solid var(--border-color); z-index: 1000; box-shadow: 0 -5px 20px rgba(0,0,0,0.03); }
-        
         .sum-container { padding: 15px 10px 10px; }
         .sum-row { display: flex; justify-content: space-between; text-align: center; max-width: 600px; margin: 0 auto; }
         .sum-item { flex: 1; border-right: 1px solid var(--border-color); }
         .sum-item:last-child { border-right: none; }
-        
         .f-label { font-size: 10px; color: var(--text-light); margin-bottom: 4px; display: block; letter-spacing: 1px; text-transform: uppercase; font-weight: bold; }
         .f-val { font-size: 20px; font-weight: bold; font-family: 'Helvetica Neue', sans-serif; color: var(--primary-dark); }
         #tr { color: var(--accent-gold-dark); } 
-
         .reached { color: var(--success-green) !important; font-weight: 800; text-shadow: 0 0 15px rgba(55, 139, 94, 0.3); transition: 0.3s; }
         
-        /* 列印模式專用統計區 */
         .print-summary { display: none; margin-top: 20px; border-top: 2px solid var(--border-color); padding-top: 15px; }
         .print-summary-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; letter-spacing: 1px; color: var(--primary-dark); font-weight: bold; }
         .print-summary-row.total-amount { font-size: 16px; color: var(--accent-gold-dark); margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border-color); }
 
-        /* 生成按鈕 */
         .action-bar { padding: 0 15px 20px; text-align: center; }
         .generate-btn { background-color: var(--primary-dark); color: #fff; border: none; padding: 12px 30px; font-size: 14px; letter-spacing: 2px; border-radius: 30px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(43, 42, 41, 0.2); width: 100%; max-width: 400px; }
         
-        /* 系統版權宣告 */
         .team-credit { background: transparent; padding: 5px 10px 15px; text-align: center; font-size: 10px; color: var(--text-light); letter-spacing: 2px; font-weight: 300; }
         .print-credit { display: none; text-align: center; color: var(--text-light); font-size: 11px; letter-spacing: 2px; margin-top: 30px; padding-top: 15px; border-top: 1px solid var(--border-color); font-weight: 300; }
 
-        /* ✨ 截圖模式 (Print Mode) 專屬設定 ✨ */
+        /* ✨ 截圖模式 (Print Mode) ✨ */
         body.print-mode { background-color: #fff; padding-bottom: 40px; }
         body.print-mode .hide-on-print { display: none !important; }
         
-        /* 截圖模式：顯示列印專屬欄位 */
         body.print-mode .show-on-print { display: table-cell !important; }
         body.print-mode thead.show-on-print { display: table-header-group !important; }
         body.print-mode div.show-on-print { display: block !important; }
 
-        /* 截圖表頭設計 */
-        .print-table-header th {
-            color: var(--accent-gold-dark);
-            font-size: 12px;
-            letter-spacing: 2px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--accent-gold);
-            font-weight: bold;
-        }
+        .print-table-header th { color: var(--accent-gold-dark); font-size: 12px; letter-spacing: 2px; padding-bottom: 12px; border-bottom: 1px solid var(--accent-gold); font-weight: bold; }
         
-        /* ✨ 截圖欄位寬度與對齊優化 (數量靠右) ✨ */
         body.print-mode .product-info-cell { width: 55%; }
-        /* 數量：靠右對齊並保留一點右邊距，與金額錯開 */
         body.print-mode .print-qty-cell { width: 20%; text-align: right; padding-right: 15px; font-size: 16px; font-family: 'Helvetica Neue', sans-serif; font-weight: bold; color: var(--text-main); }
-        /* 金額：靠最右邊 */
-        body.print-mode .print-amt-cell { width: 25%; text-align: right; font-size: 15px; font-family: 'Helvetica Neue', sans-serif; font-weight: bold; color: var(--primary-dark); }
+        body.print-mode .print-amt-cell { width: 25%; text-align: right; font-size: 16px; font-family: 'Helvetica Neue', sans-serif; font-weight: bold; color: var(--primary-dark); }
         
-        /* 隱藏單價列，讓畫面更乾淨 */
         body.print-mode .price-row { display: none !important; }
-        body.print-mode .p-name { margin-bottom: 0; }
-
-        /* 精品金框 */
-        body.print-mode .container { 
-            max-width: 100%; 
-            padding: 30px 20px; 
-            border: 1px solid var(--accent-gold-light); 
-            outline: 1px solid var(--accent-gold-light); 
-            outline-offset: -6px; 
-            margin: 10px; 
-            background: #fff; 
-        }
         
+        /* 截圖模式：允許文字斷行並放大字體 */
+        body.print-mode .p-name { 
+            white-space: normal; /* 解除單行限制 */
+            overflow: visible; 
+            margin-bottom: 0; 
+            line-height: 1.5;
+            font-size: 15px;
+        }
+
+        /* 截圖模式：啟動雙行斷行 */
+        body.print-mode .break-on-print { display: block; margin-top: 4px; }
+
+        body.print-mode .container { max-width: 100%; padding: 30px 20px; border: 1px solid var(--accent-gold-light); outline: 1px solid var(--accent-gold-light); outline-offset: -6px; margin: 10px; background: #fff; }
         body.print-mode .print-header { display: block; }
         body.print-mode .print-summary { display: block; }
         body.print-mode .print-credit { display: block; }
-        
-        body.print-mode td { padding: 12px 0; border-bottom: 1px dashed var(--border-color); }
+        body.print-mode td { padding: 15px 0; border-bottom: 1px dashed var(--border-color); }
         body.print-mode .product-image-wrapper { border-color: var(--border-color); color: var(--text-light); }
 
-        /* 返回按鈕 */
         .return-bar { text-align: center; margin: 20px auto 40px; display: none; }
         .btn-back { background-color: #fff; color: var(--primary-dark); border: 1px solid var(--primary-dark); padding: 10px 30px; border-radius: 30px; font-size: 14px; cursor: pointer; letter-spacing: 2px; transition: 0.3s; }
         .btn-back:hover { background: var(--bg-color); }
 
-        /* ✨ 手機版極限自適應優化 ✨ */
+        /* ✨ 手機版自適應優化 ✨ */
         @media (max-width: 480px) {
             .product-info-cell { width: 70%; padding-right: 5px; } 
             .stepper-cell { width: 30%; }
-            
-            /* 圓框再微調，讓出空間給文字 */
-            .product-image-wrapper { width: 32px; height: 32px; margin-right: 8px; font-size: 13px; }
-            .p-name { font-size: 13px; letter-spacing: 0px; }
+            .product-image-wrapper { width: 34px; height: 34px; margin-right: 8px; font-size: 13px; }
+            .p-name { font-size: 14px; }
             .price-row { gap: 5px; }
             .p-price { font-size: 12px; }
             .p-rv { font-size: 9px; padding: 2px 4px; }
@@ -192,15 +165,13 @@
             .stepper .btn { width: 28px; height: 28px; font-size: 16px; }
             .stepper .qty-val { width: 25px; font-size: 13px; }
             
-            /* 截圖模式在手機上的完美縮放 */
             body.print-mode .container { padding: 25px 12px 20px; margin: 8px; outline-offset: -4px; }
             body.print-mode h2 { font-size: 22px; letter-spacing: 8px; }
-            body.print-mode .p-name { font-size: 11.5px; } 
             
-            /* 數量列在手機上右邊距稍微調小，保持平衡 */
-            body.print-mode .print-qty-cell { font-size: 14px; padding-right: 10px; }
-            body.print-mode .print-amt-cell { font-size: 13px; }
-            
+            /* 手機版截圖字體也一併放大 */
+            body.print-mode .p-name { font-size: 13.5px; } 
+            body.print-mode .print-qty-cell { font-size: 15px; padding-right: 10px; }
+            body.print-mode .print-amt-cell { font-size: 14px; }
             .print-table-header th { font-size: 10px; padding-bottom: 8px; }
         }
 
@@ -263,7 +234,7 @@
 </div>
 
 <div class="return-bar" id="returnBar">
-    <button class="btn-back" onclick="returnToEdit()">⬅ BACK 重新編輯</button>
+    <button class="btn-back" onclick="returnToEdit()"> BACK 重新編輯</button>
 </div>
 
 <div class="footer hide-on-print">
@@ -284,7 +255,7 @@
     let currentTarget = 0;
     let hasAlerted = false;
 
-    // 產品清單
+    // ✨ 產品清單 (已為套組加入專屬斷行語法) ✨
     const products = [
         {n:"酵素潔顏粉", p:733, r:30000, i:"潔"}, 
         {n:"多肽化妝水", p:733, r:30000, i:"水"}, 
@@ -294,7 +265,8 @@
         {n:"防曬霜", p:611, r:25000, i:"防"},
         {n:"BB霜", p:733, r:30000, i:"B"}, 
         {n:"再生修護精華 [單瓶]", p:1222, r:50000, i:"修"}, 
-        {n:"<span class='step-badge'>No.1</span>去角質 + <span class='step-badge'>No.2</span>營養面膜", p:3178, r:130000, i:"套"},
+        // 專屬多行設定：在列印模式時隱藏 " + "，並透過 break-on-print 換行
+        {n:"<span class='step-badge'>No.1</span>去角質<span class='hide-on-print'> + </span><span class='break-on-print'><span class='step-badge'>No.2</span>營養面膜</span>", p:3178, r:130000, i:"套"},
         {n:"Q肌底安瓶", p:4398, r:180000, i:"Q"}, 
         {n:"119面膜 (3入)", p:1466, r:60000, i:"急"}, 
         {n:"淨白雪顏霜 (2入)", p:1833, r:75000, i:"雪"},
@@ -315,11 +287,9 @@
         calc();
     }
 
-    // 初始化渲染列表
     const container = document.getElementById('main-list');
     let html = '<table>';
     
-    // ✨ 專屬列印模式的表格抬頭 (數量標題也設定靠右對齊並加上右邊距) ✨
     html += `
     <thead class="show-on-print print-table-header">
         <tr>
@@ -385,7 +355,6 @@
             tp += itemTotal; 
             tr += q * p.r;
             
-            // 同步更新列印模式的單項數量與金額
             document.getElementById(`pq-${i}`).innerText = q;
             document.getElementById(`pa-${i}`).innerText = itemTotal.toLocaleString();
         });
@@ -400,7 +369,6 @@
         document.getElementById('print-tp').innerText = "$ " + tp.toLocaleString();
         document.getElementById('print-tr').innerText = tr.toLocaleString() + " RV";
 
-        // 達標提醒
         if (currentTarget > 0 && tr >= currentTarget) {
             rvDisplay.classList.add('reached');
             if (!hasAlerted) {
@@ -415,7 +383,6 @@
         }
     }
 
-    // 產出訂購明細
     function generateOrder() {
         let hasItems = false;
         
@@ -425,7 +392,7 @@
             if (q === 0) {
                 row.style.display = 'none';
             } else {
-                row.style.display = ''; // 恢復預設 table-row
+                row.style.display = '';
                 hasItems = true;
             }
         });
@@ -445,7 +412,6 @@
         window.scrollTo(0, 0);
     }
 
-    // 返回重新編輯
     function returnToEdit() {
         document.body.classList.remove('print-mode');
         document.getElementById('returnBar').style.display = 'none';
