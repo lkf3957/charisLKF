@@ -56,10 +56,12 @@
         .container { max-width: 700px; margin: 0 auto; padding: 10px 15px; }
         
         /* 產品列表樣式 */
-        table { width: 100%; border-collapse: separate; border-spacing: 0; }
+        table { width: 100%; border-collapse: separate; border-spacing: 0; table-layout: auto; }
         td { padding: 20px 5px; border-bottom: 1px solid var(--border-color); vertical-align: middle; }
         
-        .product-info-cell { width: 68%; }
+        /* 欄位寬度最佳化分配 */
+        .product-info-cell { width: auto; } 
+        .stepper-cell { width: 1%; white-space: nowrap; text-align: right; }
         
         /* 照片與文字排版 */
         .product-flex-wrap { display: flex; align-items: center; }
@@ -69,10 +71,10 @@
 
         .p-name { font-weight: bold; font-size: 16px; color: var(--primary-dark); display: block; margin-bottom: 8px; letter-spacing: 1px; line-height: 1.4;}
         
-        /* ✨ 精品標籤設計 ✨ */
+        /* 精品標籤設計 */
         .step-badge { display: inline-block; border: 1px solid var(--accent-gold); color: var(--accent-gold); padding: 1px 8px; border-radius: 12px; font-size: 11px; font-weight: bold; letter-spacing: 1px; background: #fff; margin-right: 4px; vertical-align: middle; margin-bottom: 2px;}
 
-        .price-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .price-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
         .p-price { font-size: 15px; color: var(--text-main); font-weight: bold; font-family: 'Helvetica Neue', sans-serif; }
         .p-rv { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; color: var(--accent-gold-dark); background-color: #fff; border: 1px solid var(--accent-gold-light); font-weight: bold; letter-spacing: 1px;}
 
@@ -150,6 +152,27 @@
         .btn-back { background-color: #fff; color: var(--primary-dark); border: 1px solid var(--primary-dark); padding: 10px 30px; border-radius: 30px; font-size: 14px; cursor: pointer; letter-spacing: 2px; transition: 0.3s; }
         .btn-back:hover { background: var(--bg-color); }
 
+        /* ✨ 手機版自適應優化 (防擠壓) ✨ */
+        @media (max-width: 480px) {
+            td { padding: 15px 2px; }
+            .product-image-wrapper { width: 38px; height: 38px; margin-right: 10px; font-size: 13px; }
+            .p-name { font-size: 14px; margin-bottom: 5px; }
+            .p-price { font-size: 14px; }
+            .p-rv { font-size: 10px; padding: 2px 6px; }
+            .stepper .btn { width: 30px; height: 30px; font-size: 16px; }
+            .stepper .qty-val { width: 30px; font-size: 14px; }
+            
+            /* 底部數值縮放 */
+            .f-label { font-size: 9px; }
+            .f-val { font-size: 18px; }
+            .sum-container { padding: 15px 10px 10px; }
+            .generate-btn { padding: 12px 20px; font-size: 14px; }
+            
+            /* 截圖模式邊距縮放 */
+            body.print-mode .container { padding: 30px 15px 25px; }
+            body.print-mode h2 { font-size: 24px; }
+        }
+
     </style>
 </head>
 <body>
@@ -206,8 +229,10 @@
     
     <div class="print-credit">本系統由 廖貫坊首席團隊 製作出品</div>
     
-</div> <div class="return-bar" id="returnBar">
-    <button class="btn-back" onclick="returnToEdit()">⬅ BACK 重新編輯</button>
+</div>
+
+<div class="return-bar" id="returnBar">
+    <button class="btn-back" onclick="returnToEdit()"> BACK 重新編輯</button>
 </div>
 
 <div class="footer hide-on-print">
@@ -228,7 +253,7 @@
     let currentTarget = 0;
     let hasAlerted = false;
 
-    // ✨ 產品清單 (已為去角質與面膜加入 No.1 & No.2 標籤，並指定好圓框圖標字) ✨
+    // 產品清單
     const products = [
         {n:"酵素潔顏粉", p:733, r:30000, i:"潔"}, 
         {n:"多肽化妝水", p:733, r:30000, i:"水"}, 
@@ -263,7 +288,7 @@
     const container = document.getElementById('main-list');
     let html = '<table>';
     products.forEach((p, i) => {
-        let iconChar = p.i; // 抓取設定好的文字圖標
+        let iconChar = p.i;
         
         html += `
         <tr id="row-${i}">
@@ -279,7 +304,7 @@
                     </div>
                 </div>
             </td>
-            <td align="right">
+            <td class="stepper-cell" align="right">
                 <div class="stepper">
                     <div class="btn" onclick="change(${i}, -1)">−</div>
                     <input type="number" class="qty-val" id="q-${i}" value="0" readonly>
@@ -330,7 +355,7 @@
         }
     }
 
-    // ✨ 產出訂購明細 (切換至截圖模式並顯示客戶資訊) ✨
+    // 產出訂購明細
     function generateOrder() {
         let hasItems = false;
         
@@ -351,12 +376,10 @@
             return;
         }
 
-        // ✨ 抓取姓名與日期，帶入截圖抬頭 ✨
         const name = document.getElementById('clientName').value || '貴賓';
         const dateStr = new Date().toLocaleDateString('zh-TW', { year: 'numeric', month: '2-digit', day: '2-digit' });
         document.getElementById('display-client-info').innerHTML = `<strong>CLIENT:</strong> ${name}<br><strong>DATE:</strong> ${dateStr}`;
 
-        // 切換模式
         document.body.classList.add('print-mode');
         document.getElementById('returnBar').style.display = 'block';
         window.scrollTo(0, 0);
